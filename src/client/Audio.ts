@@ -38,10 +38,15 @@ export type AudioProperties = {
   microphoneVolume: number
 }
 
+type AudioTypes = {
+  devicesUpdated: (devices: AudioDevice[]) => Promise<void> | void
+  propertiesUpdated: () => Promise<void> | void
+}
+
 /**
  * Control audio settings of the Bria client
  */
-export class BriaClientAudio extends BriaClientLeaf {
+export class BriaClientAudio extends BriaClientLeaf<AudioTypes> {
   public devices?: AudioDevice[]
   public properties?: AudioProperties
 

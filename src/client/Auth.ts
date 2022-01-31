@@ -11,7 +11,11 @@ export type AuthResponse = {
   serverProvidedReason?: string
 }
 
-export class BriaClientAuth extends BriaClientLeaf {
+type AuthEvents = {
+  authenticationUpdate: (ar: AuthResponse) => Promise<void> | void
+}
+
+export class BriaClientAuth extends BriaClientLeaf<AuthEvents> {
   public authenticated = false
   constructor(client: BriaClient) {
     super(client)

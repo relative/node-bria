@@ -1,7 +1,11 @@
 import { BriaClient } from '.'
 import EventEmitter from 'eventemitter3'
 
-export default class BriaClientLeaf extends EventEmitter {
+export default class BriaClientLeaf<
+  EventTypes extends EventEmitter.ValidEventTypes = string | symbol,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  Context = any
+> extends EventEmitter<EventTypes, Context> {
   protected client: BriaClient
 
   public constructor(client: BriaClient) {

@@ -10,7 +10,11 @@ export type Voicemail = {
   count: number
 }
 
-export class BriaClientVoicemail extends BriaClientLeaf {
+type VoicemailEvents = {
+  voicemailUpdate: (voicemail: Voicemail) => Promise<void> | void
+}
+
+export class BriaClientVoicemail extends BriaClientLeaf<VoicemailEvents> {
   public voicemails: Voicemail[] = []
   constructor(client: BriaClient) {
     super(client)

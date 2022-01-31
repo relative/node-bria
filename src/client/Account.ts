@@ -13,7 +13,13 @@ export type Account = {
   registered: boolean
 }
 
-export class BriaClientAccount extends BriaClientLeaf {
+type AccountEvents = {
+  accountCreate: (account: Account) => Promise<void> | void
+  accountUpdate: (account: Account) => Promise<void> | void
+  accountRemove: (account: Account) => Promise<void> | void
+}
+
+export class BriaClientAccount extends BriaClientLeaf<AccountEvents> {
   public accounts: Account[] = []
 
   public constructor(client: BriaClient) {

@@ -20,7 +20,11 @@ export type HistoryEntry = {
   callEnd: Date
 }
 
-export class BriaClientHistory extends BriaClientLeaf {
+type HistoryEvents = {
+  historyUpdated: () => Promise<void> | void
+}
+
+export class BriaClientHistory extends BriaClientLeaf<HistoryEvents> {
   public missedCalls = 0
   constructor(client: BriaClient) {
     super(client)
@@ -38,7 +42,7 @@ export class BriaClientHistory extends BriaClientLeaf {
    * @see https://docs.counterpath.com/guides/desk/desk_api/clients/deskAPI/deskApiEvents.htm#postStatusChangeCallHistory
    */
   private callHistoryUpdated = () => {
-    this.emit('historyUpdate')
+    this.emit('historyUpdated')
   }
   /**
    * @see https://docs.counterpath.com/guides/desk/desk_api/clients/deskAPI/deskApiEvents.htm#postStatusChangeMissedCall

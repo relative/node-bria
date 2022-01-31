@@ -65,9 +65,47 @@ type BriaClientVersion = {
 }
 
 /**
+ * @param xml XML response from simplexml (sxml), if any
+ * @param rawData Raw response string from Bria
+ */
+type BriaClientStatusChangeEvent = (
+  xml: sxml.XML,
+  rawData: string
+) => Promise<void> | void
+
+type BriaClientEvents = {
+  error: (error: Error) => void
+  warn: (warning: Error) => void
+
+  reconnect: () => Promise<void> | void
+
+  /**
+   * WebSocket is open
+   */
+  open: () => Promise<void> | void
+
+  /**
+   * Client is ready for requests
+   */
+  ready: () => Promise<void> | void
+
+  close: (code: number, reason: string) => Promise<void> | void
+
+  'statusChange.authentication': BriaClientStatusChangeEvent
+  'statusChange.phone': BriaClientStatusChangeEvent
+  'statusChange.call': BriaClientStatusChangeEvent
+  'statusChange.callOptions': BriaClientStatusChangeEvent
+  'statusChange.voicemail': BriaClientStatusChangeEvent
+  'statusChange.callHistory': BriaClientStatusChangeEvent
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  [x: string]: any
+}
+
+/**
  * Bria Client
  */
-export class BriaClient extends EventEmitter {
+export class BriaClient extends EventEmitter<BriaClientEvents> {
   private userAgent = 'node-bria'
 
   private apiUrl =

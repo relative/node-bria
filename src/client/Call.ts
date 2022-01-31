@@ -264,7 +264,15 @@ class BriaCall {
   }
 }
 
-export class BriaClientCall extends BriaClientLeaf {
+type CallEvents = {
+  callStart: (call: BriaCall, id: string) => Promise<void> | void
+  callUpdate: (call: BriaCall, id: string) => Promise<void> | void
+  callEnd: (call: BriaCall, id: string) => Promise<void> | void
+
+  optionsUpdated: () => Promise<void> | void
+}
+
+export class BriaClientCall extends BriaClientLeaf<CallEvents> {
   public options?: CallOptions
   public calls: BriaCall[] = []
 
