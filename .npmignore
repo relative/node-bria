@@ -1,4 +1,6 @@
 .eslintignore
 .eslintrc.js
 tsconfig.json
+typedoc.json
 src/
+docs/
