@@ -4,7 +4,7 @@ import WebSocket from 'ws'
 import semver from 'semver'
 import sxml from 'sxml'
 
-import BriaRequest from '../requests/BriaRequest'
+import { BriaRequest, BringToFrontRequest } from '../requests'
 
 import { BriaClientStatus } from './Status'
 import { BriaClientAudio } from './Audio'
@@ -14,7 +14,6 @@ import { BriaClientVoicemail } from './Voicemail'
 import { BriaClientHistory } from './History'
 import { BriaClientPresence } from './Presence'
 import { BriaClientCollaboration } from './Collaboration'
-import BringToFrontRequest from '../requests/BringToFrontRequest'
 import { BriaClientAuth } from './Auth'
 import { BriaClientPhone } from './Phone'
 
