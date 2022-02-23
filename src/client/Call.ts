@@ -64,7 +64,7 @@ export type DTMFDigit =
   | '9'
   | '*'
   | '#'
-export type DTMFType = 'start' | 'stop'
+export type DTMFType = 'start' | 'stop' | 'pulse'
 export type CallParty = {
   number: CallNumber
   displayName: string

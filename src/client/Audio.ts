@@ -34,6 +34,12 @@ export type AudioProperties = {
    */
   speaker: boolean
 
+  /**
+   * https://github.com/CounterPath/Bria_API_CSharp_SampleApp_3/blob/16712ddda3/Bria_API_SampleApp_Phone/BriaAPIWrapper.cs#L1175
+   * ?
+   */
+  supressDialtone: boolean
+
   speakerVolume: number
   microphoneVolume: number
 }
@@ -99,6 +105,7 @@ export class BriaClientAudio extends BriaClientLeaf<AudioTypes> {
       speaker: xProperties.get('speaker').at(0).getValue() === 'enabled',
       speakerVolume: -1,
       microphoneVolume: -1,
+      supressDialtone: false,
     }
     for (const vol of xProperties.get('volume')) {
       switch (vol.getProperty('type')) {

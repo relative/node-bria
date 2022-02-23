@@ -20,6 +20,19 @@ export default class SetAudioPropertiesRequest extends BriaRequest {
         properties.speaker ? 'enabled' : 'disabled'
       )
 
+    // "supressDialtone"
+    if (
+      typeof properties.supressDialtone === 'boolean' &&
+      typeof properties.speaker === 'boolean'
+    ) {
+      this.xml?.get('speaker').at(0).setProperty(
+        'supressDialtone',
+        // And this is a boolean (true/false) and not enabled/disabled ?
+        // https://github.com/CounterPath/Bria_API_CSharp_SampleApp_3/blob/16712ddda3/Bria_API_SampleApp_Phone/BriaAPIWrapper.cs#L1175
+        properties.supressDialtone.toString()
+      )
+    }
+
     if (typeof properties.speakerVolume === 'number') {
       const speakerVolume = new sxml.XML()
       speakerVolume.setTag('volume')

@@ -3,7 +3,7 @@ import { HistoryType } from '../client/History'
 
 export default class ShowHistoryRequest extends BriaRequest {
   public constructor(type: HistoryType, text?: string) {
-    super('showoHistory', 'filter')
+    super('showHistory', 'filter')
     this.xml?.insertValue('type', type)
     if (text) this.xml?.insertValue('text', text)
   }
